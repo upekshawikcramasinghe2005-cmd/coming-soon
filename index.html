@@ -1,83 +1,69 @@
-*{
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <title> Weather App</title>
-            <link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link  href="style.css" rel="stylesheet" type="text/css">
 
-        </head>
-        <body>
-        <div class="card">
-            <div class="search">
-                <input type="text" placeholder="Enter city name" spellcheck="false">
-                <button><img src="Images/search.png">
+
+</head>
+<body>
+<div class="container">
+    <img src="images/logo.png"  class="logo">
+    <div class="content">
+        <p>We're working hard to bring you something amazing!</p>
+        <h1> We're <span> Coming Soon</span> !</h1>
+        <div class="launch-time">
+            <div>
+                <p id="days">00</p>
+                <span>Days</span>
             </div>
-            <div class="weather">
-                <img src="Images/rain.png">
-                <h1 class="temp">22°C</h1>
-                <h2 class="city">New York</h2>
-                <div class="details">
-                    <div class="col">
-                        <img src="Images/humidity.png">
-                        <div>
-                            <p class="humidity">50%</p>
-                            <p>Humidity</p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <img src="Images/wind.png">
-                        <div>
-                            <p class="wind">15km/h</p>
-                            <p> Wind Speed</p>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <p id="hours">00</p>
+                <span>Hours</span>
+            </div>
+            <div>
+                <p id="minutes">00</p>
+                <span>Minutes</span>
+            </div>
+            <div>
+                <p id="seconds">00</p>
+                <span>Seconds</span>
             </div>
         </div>
-        <script>
-        const apiKey="9a4ebb0bd4342cfc4dd9d9ed4c8ed550";
-        const apiUrl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        <button type="button">Learn more<img src="images/triangle.png" ></button>
+    </div>
+    <img src="images/rocket.png" class="rocket">
+</div>
 
-        const searchBox=document.querySelector(".search input");
-        const searchBtn=document.querySelector(".search input");
+<script>
+    var countdownDate = new Date("june 30, 2026 00:00:00").getTime();
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countdownDate - now;
 
-        
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
 
-        async function checkWeather(city){
-            const response=await fetch(apiUrl + city + `&appid=${apiKey}`);
-            var data=await response. json();
-            console.log(data);
-
-
-
-            document.querySelector(".city").innerHTML=data.name;
-            document.querySelector(".temp").innerHTML=Math.round(data.main.temp) +"°C";
-            document.querySelector(".humidity").innerHTML=data.main.humidity+"%";
-            document.querySelector(".wind").innerHTML=data.wind.speed+"km/h";
-
-
-            
-
-
-
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("days").innerHTML = "00";
+            document.getElementById("hours").innerHTML = "00";
+            document.getElementById("minutes").innerHTML = "00";
+            document.getElementById("seconds").innerHTML = "00";
         }
-        searchBtn.addEventListener("click",()=>{
+    }, 1000);
+</script>
 
-            checkWeather(searchBox.value);
-        })
-         
-        
-        
-        
-        
-      
-        checkWeather( );    
-        </script>
+</body>
 
 
-        </body>
-    </html>
-
-}
+</html>
